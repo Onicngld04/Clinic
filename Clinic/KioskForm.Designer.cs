@@ -46,8 +46,8 @@
             // 
             // Welcome_panel
             // 
-            this.Welcome_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.Welcome_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Welcome_panel.BackColor = System.Drawing.Color.White;
             this.Welcome_panel.Controls.Add(this.WCM_panel);
@@ -59,8 +59,8 @@
             // 
             // WCM_panel
             // 
-            this.WCM_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.WCM_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WCM_panel.Controls.Add(this.Logo1_pb);
             this.WCM_panel.Controls.Add(this.Intro_panel);
@@ -128,7 +128,16 @@
             // 
             this.Logo1_pb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.Logo1_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Logo1_pb.Image = ((System.Drawing.Image)(resources.GetObject("Logo1_pb.Image")));
+
+            // ── Safe image load — prevents crash if resource is missing ──
+            try
+            {
+                object imgResource = resources.GetObject("Logo1_pb.Image");
+                if (imgResource != null)
+                    this.Logo1_pb.Image = ((System.Drawing.Image)(imgResource));
+            }
+            catch { /* Image resource missing — PictureBox stays blank */ }
+
             this.Logo1_pb.Location = new System.Drawing.Point(199, -35);
             this.Logo1_pb.Name = "Logo1_pb";
             this.Logo1_pb.Size = new System.Drawing.Size(610, 344);
@@ -168,7 +177,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Logo1_pb)).EndInit();
             this.panelWelcome_Click.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -183,4 +191,3 @@
         private System.Windows.Forms.Label Click_lbl;
     }
 }
-
